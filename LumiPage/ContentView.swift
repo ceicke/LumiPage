@@ -7,22 +7,18 @@
 
 import SwiftUI
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Prevent the device from sleeping
-        UIApplication.shared.isIdleTimerDisabled = true
-        return true
-    }
-}
-
 struct ContentView: View {
+    
+    // This let's you turn on debugging
+    private let debug: Bool = false
+    
     // Define the list of colors
     private let colors: [Color] = [.yellow, .red, .green, .blue]
     
-    private let debug: Bool = false
-    
     @AppStorage("currentColorIndex") private var currentColorIndex: Int = 0
-    @AppStorage("brightness") private var brightness: Double = 0.5
+    
+    @State private var brightness: CGFloat = UserDefaults.standard.value(forKey: "brightness") as? CGFloat ?? 0.5
+    @State private var brightnessWhenEntering: CGFloat = 0.5
     
     var body: some View {
         VStack {
@@ -55,14 +51,20 @@ struct ContentView: View {
            }
         )
         .onAppear {
-            // Set the initial brightness and currentColorIndex value when the app appears
-            UIScreen.main.brightness = brightness
+            // Set the initial currentColorIndex value when the app appears
             currentColorIndex = currentColorIndex
+            // Disable the idle timer when the view appears
+            UIApplication.shared.isIdleTimerDisabled = true
+            // Save initial brightness
+            brightnessWhenEntering = UIScreen.main.brightness
         }
         .onDisappear {
-            // Save the brightness and currentColorIndex values when the app disappears
-            UserDefaults.standard.set(brightness, forKey: "brightness")
+            // Save the currentColorIndex value when the app disappears
             UserDefaults.standard.set(currentColorIndex, forKey: "currentColorIndex")
+            // Re-enable the idle timer when the view disappears
+            UIApplication.shared.isIdleTimerDisabled = false
+            // Restore initial brightness
+            UIScreen.main.brightness = brightnessWhenEntering
         }
         
     }
