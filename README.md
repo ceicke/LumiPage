@@ -1,2 +1,3 @@
 Say goodbye to straining your eyes or disturbing your partner with bright lamps when reading in bed at night. LumiPage uses your phone’s screen to emit a soft, adjustable light, transforming your device into the perfect reading lamp. With LumiPage, you can easily adjust the brightness and color to suit your needs, ensuring a comfortable reading environment no matter the time of day. Whether you’re diving into a thrilling novel, studying for an exam, or catching up on your favorite magazine, LumiPage provides the ideal illumination for all your reading materials.
+
 It’s really simple to use: swipe up to increase brightness, swipe down to lower the brightness. Tap for different color.
